@@ -1,29 +1,19 @@
-# Dependencies
-node_modules/
-pnpm-lock.yaml
-package-lock.json
-yarn.lock
-
 # Build outputs
 dist/
-build/
-*.tsbuildinfo
+node_modules/
 
-# Generated files
-*.d.ts
-*.min.js
-
-# Config files that shouldn't be formatted
+# Config files
 *.config.js
 *.config.ts
-eslint.config.js
 
-# Demo files with specific formatting
-docs/index.html
+# Documentation and examples
+docs/
+examples/
 
 # Test coverage
 coverage/
-*.lcov
 
-# Environment files
-.env*
+# Package files
+pnpm-lock.yaml
+package-lock.json
+yarn.lock

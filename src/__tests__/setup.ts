@@ -33,7 +33,6 @@ function createMockElement(tagName: string): HTMLElement {
     nodeType: 1,
     nodeName: tagName.toUpperCase(),
     nodeValue: null,
-    // Add properties needed for React Testing Library
     ownerDocument: null,
     getRootNode: vi.fn(() => ({})),
     contains: vi.fn(() => false),
@@ -60,15 +59,22 @@ const mockDocument: Document = {
     removeChild: vi.fn(),
     createElement: vi.fn(createMockElement),
   } as unknown as HTMLBodyElement,
-  // Add properties needed for React Testing Library
   documentElement: createMockElement('html'),
   head: createMockElement('head'),
   implementation: {
     createHTMLDocument: vi.fn(() => mockDocument),
   },
-  createTextNode: vi.fn((text: string) => ({ nodeType: 3, nodeValue: text, textContent: text })),
+  createTextNode: vi.fn((text: string) => ({
+    nodeType: 3,
+    nodeValue: text,
+    textContent: text,
+  })),
   createDocumentFragment: vi.fn(() => ({ nodeType: 11, childNodes: [] })),
-  createComment: vi.fn((text: string) => ({ nodeType: 8, nodeValue: text, textContent: text })),
+  createComment: vi.fn((text: string) => ({
+    nodeType: 8,
+    nodeValue: text,
+    textContent: text,
+  })),
   createRange: vi.fn(() => ({
     setStart: vi.fn(),
     setEnd: vi.fn(),
@@ -120,7 +126,6 @@ const mockWindow: Window = {
   addEventListener: vi.fn(),
   removeEventListener: vi.fn(),
   document: mockDocument,
-  // Add properties needed for React Testing Library
   getComputedStyle: vi.fn(() => ({
     getPropertyValue: vi.fn(() => ''),
   })),
@@ -134,15 +139,19 @@ const mockWindow: Window = {
     removeEventListener: vi.fn(),
     dispatchEvent: vi.fn(),
   })),
-  requestAnimationFrame: vi.fn((cb: FrameRequestCallback) => setTimeout(cb, 0)),
+  requestAnimationFrame: vi.fn((cb: FrameRequestCallback) => {
+    const id = Math.random();
+    setTimeout(cb, 0);
+    return id;
+  }),
   cancelAnimationFrame: vi.fn(),
-  setTimeout: vi.fn((cb: (...args: any[]) => void, delay: number) => {
+  setTimeout: vi.fn((cb: (...args: unknown[]) => void, delay: number) => {
     const id = Math.random();
     setTimeout(cb, delay);
     return id;
   }),
   clearTimeout: vi.fn(),
-  setInterval: vi.fn((cb: (...args: any[]) => void, delay: number) => {
+  setInterval: vi.fn((cb: (...args: unknown[]) => void, delay: number) => {
     const id = Math.random();
     setInterval(cb, delay);
     return id;

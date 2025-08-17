@@ -22,7 +22,8 @@
                 <h2>Search Modal</h2>
                 <p>Open search with Cmd+K, close with Escape</p>
                 <div class="code">
-                    <pre><code>import { useShortcuts } from 'just-hotkeys/react';
+                    <pre><code>import { useState } from 'react';
+import { useShortcuts } from 'just-hotkeys/react';
 
 function SearchModal() {
   const [open, setOpen] = useState(false);
@@ -52,8 +53,16 @@ function SearchModal() {
                 <h2>Command Palette</h2>
                 <p>Open command palette with Cmd+Shift+P</p>
                 <div class="code">
-                    <pre><code>function CommandPalette() {
+                    <pre><code>import { useState } from 'react';
+import { useShortcuts } from 'just-hotkeys/react';
+
+function CommandPalette() {
   const [open, setOpen] = useState(false);
+  
+  const newFile = () => console.log('Creating new file...');
+  const openFile = () => console.log('Opening file...');
+  const saveAs = () => console.log('Saving file as...');
+  
   const commands = [
     { key: 'cmd+shift+n', label: 'New File', action: newFile },
     { key: 'cmd+shift+o', label: 'Open File', action: openFile },
@@ -88,8 +97,14 @@ function SearchModal() {
                 <h2>Navigation Controls</h2>
                 <p>Arrow keys with modifiers for navigation</p>
                 <div class="code">
-                    <pre><code>function NavigationComponent() {
+                    <pre><code>import { useState, useRef } from 'react';
+import { useShortcuts } from 'just-hotkeys/react';
+
+function NavigationComponent() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const panelRef = useRef(null);
+
+  const jump = () => console.log('Jumping!');
 
   useShortcuts({
     'arrowup': () => setPosition(p => ({ ...p, y: p.y - 1 })),
@@ -102,7 +117,7 @@ function SearchModal() {
     'cmd+arrowdown': () => setPosition(p => ({ ...p, y: 100 })),
   });
 
-  return &lt;div style={{ left: position.x, top: position.y }}&gt;Player&lt;/div&gt;;
+  return &lt;div ref={panelRef} style={{ left: position.x, top: position.y }}&gt;Player&lt;/div&gt;;
 }</code></pre>
                 </div>
                 <button onclick="runExample('navigation')">Load Example</button>
@@ -112,7 +127,7 @@ function SearchModal() {
                 <h2>Install</h2>
                 <div class="install">
                     <code>npm install just-hotkeys</code>
-                    <button onclick="copyInstall()">Copy</button>
+                    <button onclick="copyInstall(event)">Copy</button>
                 </div>
             </section>
         </main>

@@ -24,12 +24,23 @@ export default [
         EventTarget: 'readonly',
         HTMLElement: 'readonly',
         HTMLDivElement: 'readonly',
+        HTMLBodyElement: 'readonly',
         KeyboardEvent: 'readonly',
         EventListener: 'readonly',
         // Node.js globals
         globalThis: 'readonly',
         // React globals
         React: 'readonly',
+        // Additional browser globals
+        Document: 'readonly',
+        Window: 'readonly',
+        setTimeout: 'readonly',
+        setInterval: 'readonly',
+        clearTimeout: 'readonly',
+        clearInterval: 'readonly',
+        requestAnimationFrame: 'readonly',
+        cancelAnimationFrame: 'readonly',
+        FrameRequestCallback: 'readonly',
       },
     },
     plugins: {
@@ -48,7 +59,7 @@ export default [
     },
   },
   {
-    files: ['**/*.{test,spec}.{ts,tsx}'],
+    files: ['**/*.{test,spec}.{ts,tsx}', '**/__tests__/**/*.{ts,tsx}'],
     languageOptions: {
       globals: {
         describe: 'readonly',
@@ -61,10 +72,34 @@ export default [
         // Test environment globals
         document: 'readonly',
         global: 'readonly',
+        // Additional test globals
+        Document: 'readonly',
+        Window: 'readonly',
+        HTMLBodyElement: 'readonly',
+        setTimeout: 'readonly',
+        setInterval: 'readonly',
+        clearTimeout: 'readonly',
+        clearInterval: 'readonly',
+        requestAnimationFrame: 'readonly',
+        cancelAnimationFrame: 'readonly',
+        FrameRequestCallback: 'readonly',
       },
     },
   },
   {
-    ignores: ['dist/**', 'node_modules/**', '*.config.js', '*.config.ts'],
+    ignores: [
+      'dist/**',
+      'node_modules/**',
+      '*.config.js',
+      '*.config.ts',
+      'docs/**',
+      'examples/**',
+      'coverage/**',
+      '*.d.ts',
+      '*.min.js',
+      'pnpm-lock.yaml',
+      'package-lock.json',
+      'yarn.lock'
+    ],
   },
 ];

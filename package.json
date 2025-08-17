@@ -26,7 +26,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "demo": "cd docs && python -m http.server 8000 --bind 127.0.0.1",
+    "demo": "npx serve docs -p 8000",
     "demo:open": "open http://localhost:8000",
     "test": "vitest",
     "test:ui": "vitest --ui",

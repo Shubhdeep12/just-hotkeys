@@ -27,7 +27,8 @@ const DEFAULT_OPTIONS: Required<ShortcutOptions> = {
  * Check if the current target is an input element
  */
 function isInputElement(target: EventTarget | null): boolean {
-  if (!target || typeof (target as HTMLElement).tagName !== 'string') return false;
+  if (!target || typeof (target as HTMLElement).tagName !== 'string')
+    return false;
 
   const element = target as HTMLElement;
   const tagName = element.tagName.toLowerCase();
@@ -48,11 +49,12 @@ export function createShortcuts(
   options: ShortcutOptions = {}
 ): ShortcutManager {
   // Ensure target is evaluated at runtime
-  const target = options.target || (globalThis as GlobalWithDocument).document || globalThis;
-  const config = { 
-    ...DEFAULT_OPTIONS, 
+  const target =
+    options.target || (globalThis as GlobalWithDocument).document || globalThis;
+  const config = {
+    ...DEFAULT_OPTIONS,
     ...options,
-    target 
+    target,
   };
   const parsedShortcuts = new Map<
     string,

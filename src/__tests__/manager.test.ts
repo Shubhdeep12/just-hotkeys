@@ -26,8 +26,11 @@ describe('createShortcuts', () => {
     };
 
     // Store original document and replace it
-    (globalThis as GlobalWithDocument).__originalDocument = (globalThis as GlobalWithDocument).document;
-    (globalThis as GlobalWithDocument).document = mockDocument as unknown  as EventTarget;
+    (globalThis as GlobalWithDocument).__originalDocument = (
+      globalThis as GlobalWithDocument
+    ).document;
+    (globalThis as GlobalWithDocument).document =
+      mockDocument as unknown as EventTarget;
 
     // Reset mocks
     vi.clearAllMocks();
@@ -35,9 +38,11 @@ describe('createShortcuts', () => {
 
   afterEach(() => {
     if (manager) manager.destroy();
-    
+
     // Restore original document
-    (globalThis as GlobalWithDocument).document = (globalThis as GlobalWithDocument).__originalDocument;
+    (globalThis as GlobalWithDocument).document = (
+      globalThis as GlobalWithDocument
+    ).__originalDocument;
   });
 
   it('should create shortcuts manager', () => {
@@ -85,13 +90,13 @@ describe('createShortcuts', () => {
 
   it('should add new shortcuts', () => {
     const manager = createShortcuts({ 'cmd+k': vi.fn() });
-    
+
     manager.add({ 'cmd+/': vi.fn() });
     const active = manager.getActiveShortcuts();
-    
+
     expect(active).toContain('cmd+k');
     expect(active).toContain('cmd+/');
-    
+
     manager.destroy();
   });
 
@@ -101,22 +106,22 @@ describe('createShortcuts', () => {
       'cmd+/': vi.fn(),
       escape: vi.fn(),
     });
-    
+
     manager.remove(['cmd+k', 'escape']);
     const active = manager.getActiveShortcuts();
-    
+
     expect(active).not.toContain('cmd+k');
     expect(active).not.toContain('escape');
     expect(active).toContain('cmd+/');
-    
+
     manager.destroy();
   });
 
   it('should handle empty shortcuts object', () => {
     const manager = createShortcuts({});
-    
+
     expect(manager.getActiveShortcuts()).toEqual([]);
-    
+
     manager.destroy();
   });
 
@@ -126,17 +131,17 @@ describe('createShortcuts', () => {
       removeEventListener: vi.fn(),
       dispatchEvent: vi.fn(),
     } as unknown as EventTarget;
-    
+
     const manager = createShortcuts(
       { 'cmd+k': vi.fn() },
       { target: customTarget }
     );
-    
+
     expect(customTarget.addEventListener).toHaveBeenCalledWith(
       'keydown',
       expect.any(Function)
     );
-    
+
     manager.destroy();
     expect(customTarget.removeEventListener).toHaveBeenCalledWith(
       'keydown',

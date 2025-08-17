@@ -47,7 +47,7 @@ function runExample(type) {
     `;
 }
 
-function copyInstall() {
+function copyInstall(event) {
     navigator.clipboard.writeText('npm install just-hotkeys').then(() => {
         const btn = event.target;
         const originalText = btn.textContent;
@@ -58,12 +58,24 @@ function copyInstall() {
             btn.textContent = originalText;
             btn.style.background = '';
         }, 2000);
+    }).catch(() => {
+        // Fallback for older browsers
+        const btn = event.target;
+        btn.textContent = 'Failed to copy';
+        btn.style.background = '#dc3545';
+        
+        setTimeout(() => {
+            btn.textContent = 'Copy';
+            btn.style.background = '';
+        }, 2000);
     });
 }
 
 // Helper function to add new logs at the top
 function addLogAtTop(message, color = '#495057') {
     const logsContainer = document.getElementById('logs');
+    if (!logsContainer) return;
+    
     const timestamp = new Date().toLocaleTimeString();
     const newLog = document.createElement('div');
     newLog.innerHTML = `[${timestamp}] ${message}`;
