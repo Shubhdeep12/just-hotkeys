@@ -1,6 +1,6 @@
 {
   "name": "just-hotkeys",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A declarative keyboard shortcut manager for JavaScript and TypeScript - framework agnostic with React support",
   "type": "module",
   "main": "./dist/index.js",
