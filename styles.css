@@ -1,0 +1,260 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f8f9fa;
+    color: #495057;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    color: #343a40;
+}
+
+header p {
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin-bottom: 20px;
+}
+
+.links {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.links a {
+    color: #495057;
+    text-decoration: none;
+    padding: 8px 16px;
+    border: 1px solid #adb5bd;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.links a:hover {
+    background: #495057;
+    color: white;
+}
+
+.main-container {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.examples-section {
+    max-width: 800px;
+}
+
+.example {
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.example h2 {
+    margin-bottom: 10px;
+    color: #343a40;
+}
+
+.example p {
+    color: #6c757d;
+    margin-bottom: 15px;
+}
+
+.code {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 15px;
+    overflow-x: auto;
+}
+
+.code pre {
+    margin: 0;
+}
+
+.code code {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #495057;
+}
+
+button {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: #495057;
+}
+
+.install {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.install code {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-family: monospace;
+    flex: 1;
+    color: #495057;
+}
+
+.output-section {
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+}
+
+.output-section h3 {
+    margin-bottom: 15px;
+    color: #343a40;
+    font-size: 1.2rem;
+}
+
+#output {
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    min-height: 300px;
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #495057;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.info-text {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.info-text p {
+    margin-bottom: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.info-text ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.info-text li {
+    margin-bottom: 5px;
+}
+
+.example-status {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.logs-container {
+    min-height: 100px;
+}
+
+.logs-container > div {
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+#output p {
+    margin-bottom: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+#output ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+#output li {
+    margin-bottom: 5px;
+}
+
+kbd {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 3px;
+    padding: 2px 6px;
+    font-family: monospace;
+    font-size: 12px;
+    color: #495057;
+}
+
+#confetti {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+@media (max-width: 1000px) {
+    .main-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .output-section {
+        position: static;
+        order: -1;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .install {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .code {
+        font-size: 12px;
+    }
+}

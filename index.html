@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>just-hotkeys</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>just-hotkeys</h1>
+        <p>A declarative keyboard shortcut manager for JavaScript and TypeScript</p>
+        <div class="links">
+            <a href="https://github.com/shubhdeep12/just-hotkeys" target="_blank">GitHub</a>
+            <a href="https://github.com/sponsors/shubhdeep12" target="_blank">Sponsor</a>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <main class="examples-section">
+            <section class="example">
+                <h2>Search Modal</h2>
+                <p>Open search with Cmd+K, close with Escape</p>
+                <div class="code">
+                    <pre><code>import { useState } from 'react';
+import { useShortcuts } from 'just-hotkeys/react';
+
+function SearchModal() {
+  const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState('');
+
+  useShortcuts({
+    'cmd+k': () => setOpen(true),
+    esc: () => setOpen(false),
+  });
+
+  return open ? (
+    &lt;div className="modal"&gt;
+      &lt;input
+        value={query}
+        onChange={e => setQuery(e.target.value)}
+        placeholder="Search..."
+        autoFocus
+      /&gt;
+    &lt;/div&gt;
+  ) : null;
+}</code></pre>
+                </div>
+                <button onclick="runExample('search')">Load Example</button>
+            </section>
+
+            <section class="example">
+                <h2>Command Palette</h2>
+                <p>Open command palette with Cmd+Shift+P</p>
+                <div class="code">
+                    <pre><code>import { useState } from 'react';
+import { useShortcuts } from 'just-hotkeys/react';
+
+function CommandPalette() {
+  const [open, setOpen] = useState(false);
+  
+  const newFile = () => console.log('Creating new file...');
+  const openFile = () => console.log('Opening file...');
+  const saveAs = () => console.log('Saving file as...');
+  
+  const commands = [
+    { key: 'cmd+shift+n', label: 'New File', action: newFile },
+    { key: 'cmd+shift+o', label: 'Open File', action: openFile },
+    { key: 'cmd+shift+s', label: 'Save As', action: saveAs },
+  ];
+
+  useShortcuts({
+    'cmd+shift+p': () => setOpen(true),
+    esc: () => setOpen(false),
+    ...commands.reduce((acc, cmd) => ({
+      ...acc,
+      [cmd.key]: cmd.action,
+    }), {})
+  });
+
+  return open ? (
+    &lt;div className="command-palette"&gt;
+      {commands.map(cmd => (
+        &lt;div key={cmd.key} className="command"&gt;
+          &lt;span className="shortcut"&gt;{cmd.key}&lt;/span&gt;
+          &lt;span className="label"&gt;{cmd.label}&lt;/span&gt;
+        &lt;/div&gt;
+      ))}
+    &lt;/div&gt;
+  ) : null;
+}</code></pre>
+                </div>
+                <button onclick="runExample('palette')">Load Example</button>
+            </section>
+
+            <section class="example">
+                <h2>Navigation Controls</h2>
+                <p>Arrow keys with modifiers for navigation</p>
+                <div class="code">
+                    <pre><code>import { useState, useRef } from 'react';
+import { useShortcuts } from 'just-hotkeys/react';
+
+function NavigationComponent() {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const panelRef = useRef(null);
+
+  const jump = () => console.log('Jumping!');
+
+  useShortcuts({
+    'arrowup': () => setPosition(p => ({ ...p, y: p.y - 1 })),
+    'arrowdown': () => setPosition(p => ({ ...p, y: p.y + 1 })),
+    'arrowleft': () => setPosition(p => ({ ...p, x: p.x - 1 })),
+    'arrowright': () => setPosition(p => ({ ...p, x: p.x + 1 })),
+    'shift+arrowup': () => setPosition(p => ({ ...p, y: p.y - 10 })),
+    'shift+arrowdown': () => setPosition(p => ({ ...p, y: p.y + 10 })),
+    'cmd+arrowup': () => setPosition(p => ({ ...p, y: 0 })),
+    'cmd+arrowdown': () => setPosition(p => ({ ...p, y: 100 })),
+  });
+
+  return &lt;div ref={panelRef} style={{ left: position.x, top: position.y }}&gt;Player&lt;/div&gt;;
+}</code></pre>
+                </div>
+                <button onclick="runExample('navigation')">Load Example</button>
+            </section>
+
+            <section class="example">
+                <h2>Install</h2>
+                <div class="install">
+                    <code>npm install just-hotkeys</code>
+                    <button onclick="copyInstall(event)">Copy</button>
+                </div>
+            </section>
+        </main>
+
+        <aside class="output-section">
+            <h3>Live Output</h3>
+            <div id="output">
+                <div class="info-text">
+                    <p>Click "Load Example" to see shortcuts in action!</p>
+                    <p>Try these shortcuts on this page:</p>
+                    <ul>
+                        <li><kbd>Cmd+K</kbd> - Search</li>
+                        <li><kbd>Cmd+/</kbd> - Help</li>
+                        <li><kbd>Esc</kbd> - Close</li>
+                        <li><kbd>Cmd+Shift+P</kbd> - Command Palette</li>
+                    </ul>
+                </div>
+                <div id="logs" class="logs-container">
+                    <!-- New logs will appear here -->
+                </div>
+            </div>
+        </aside>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
