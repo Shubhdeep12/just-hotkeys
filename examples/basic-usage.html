@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>just-hotkeys - Basic Usage Example</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        .example {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .shortcut {
+            background: #1e293b;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.875rem;
+        }
+        .output {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            margin: 1rem 0;
+            min-height: 100px;
+        }
+        button {
+            background: #6366f1;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+        }
+        button:hover {
+            background: #4f46e5;
+        }
+        input {
+            padding: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+            width: 100%;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>just-hotkeys - Basic Usage Example</h1>
+    
+    <div class="example">
+        <h3>Try these keyboard shortcuts:</h3>
+        <ul>
+            <li><span class="shortcut">Ctrl/Cmd + S</span> - Save (logs to console)</li>
+            <li><span class="shortcut">Ctrl/Cmd + K</span> - Search (focuses input)</li>
+            <li><span class="shortcut">Ctrl/Cmd + /</span> - Help (shows help message)</li>
+            <li><span class="shortcut">Escape</span> - Clear output</li>
+        </ul>
+    </div>
+
+    <div class="example">
+        <h3>Interactive Elements:</h3>
+        <input type="text" id="searchInput" placeholder="Type here and use Ctrl+K to focus...">
+        <br>
+        <button onclick="logMessage('Button clicked!')">Click me</button>
+        <button onclick="clearOutput()">Clear Output</button>
+    </div>
+
+    <div class="example">
+        <h3>Output:</h3>
+        <div id="output" class="output">Press some shortcuts to see output here...</div>
+    </div>
+
+    <script type="module">
+        // Import the library (this would be from your actual build)
+        // import { createHotkey } from '../dist/index.js';
+        
+        // For demo purposes, we'll simulate the library
+        const createHotkey = (keys, callback, options = {}) => {
+            const handler = (e) => {
+                if (options.preventDefault !== false) {
+                    e.preventDefault();
+                }
+                callback(e);
+            };
+            
+            document.addEventListener('keydown', handler);
+            return () => document.removeEventListener('keydown', handler);
+        };
+
+        // Create shortcuts
+        createHotkey('ctrl+s', () => {
+            logMessage('💾 Save triggered!');
+        });
+
+        createHotkey('cmd+s', () => {
+            logMessage('💾 Save triggered! (Mac)');
+        });
+
+        createHotkey('ctrl+k', () => {
+            logMessage('🔍 Search triggered!');
+            document.getElementById('searchInput').focus();
+        });
+
+        createHotkey('cmd+k', () => {
+            logMessage('🔍 Search triggered! (Mac)');
+            document.getElementById('searchInput').focus();
+        });
+
+        createHotkey('ctrl+/', () => {
+            logMessage('❓ Help triggered!');
+        });
+
+        createHotkey('cmd+/', () => {
+            logMessage('❓ Help triggered! (Mac)');
+        });
+
+        createHotkey('escape', () => {
+            logMessage('🚪 Escape pressed - clearing output');
+            setTimeout(clearOutput, 500);
+        });
+
+        // Utility functions
+        window.logMessage = function(message) {
+            const output = document.getElementById('output');
+            const timestamp = new Date().toLocaleTimeString();
+            output.innerHTML += `<div>[${timestamp}] ${message}</div>`;
+            output.scrollTop = output.scrollHeight;
+        };
+
+        window.clearOutput = function() {
+            document.getElementById('output').innerHTML = 'Output cleared...';
+        };
+
+        // Log initial message
+        logMessage('🚀 just-hotkeys example loaded! Try the keyboard shortcuts above.');
+    </script>
+</body>
+</html>
