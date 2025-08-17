@@ -3,7 +3,7 @@
  *
  * @example
  * ```tsx
- * import { useShortcuts } from 'declarative-shortcuts/react';
+ * import { useShortcuts } from 'just-hotkeys/react';
  *
  * function App() {
  *   const [searchOpen, setSearchOpen] = useState(false);

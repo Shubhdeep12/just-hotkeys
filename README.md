@@ -1,4 +1,4 @@
-# 🚀 Declarative Shortcuts
+# 🚀 just-hotkeys
 
 A modern, declarative keyboard shortcut manager for JavaScript and TypeScript. Framework-agnostic with first-class React support.
 
@@ -34,7 +34,7 @@ hotkeys('esc', event => {
 });
 ```
 
-**Declarative Shortcuts** lets you just declare what you want:
+**just-hotkeys** lets you just declare what you want:
 
 ```js
 // 🎉 The declarative way
@@ -50,11 +50,11 @@ No manual event handling, no repetitive code, just pure intent.
 ## 📦 Installation
 
 ```bash
-npm install declarative-shortcuts
+npm install just-hotkeys
 # or
-yarn add declarative-shortcuts
+yarn add just-hotkeys
 # or
-pnpm add declarative-shortcuts
+pnpm add just-hotkeys
 ```
 
 ## 🚀 Quick Start
@@ -62,7 +62,7 @@ pnpm add declarative-shortcuts
 ### Vanilla JavaScript/TypeScript
 
 ```typescript
-import { createShortcuts } from 'declarative-shortcuts';
+import { createShortcuts } from 'just-hotkeys';
 
 // Create shortcuts
 const cleanup = createShortcuts({
@@ -79,7 +79,7 @@ cleanup();
 ### React
 
 ```tsx
-import { useShortcuts } from 'declarative-shortcuts/react';
+import { useShortcuts } from 'just-hotkeys/react';
 
 function App() {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -211,7 +211,7 @@ import {
   useConditionalShortcuts,
   useScopedShortcuts,
   useShortcutManager,
-} from 'declarative-shortcuts/react';
+} from 'just-hotkeys/react';
 
 function AdvancedComponent() {
   const [mode, setMode] = useState('normal');

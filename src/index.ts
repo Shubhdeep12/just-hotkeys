@@ -3,7 +3,7 @@
  *
  * @example
  * ```typescript
- * import { createShortcuts } from 'declarative-shortcuts';
+ * import { createShortcuts } from 'just-hotkeys';
  *
  * const cleanup = createShortcuts({
  *   'cmd+k': () => openSearch(),
